@@ -20,7 +20,7 @@
     </div>
 </body>
 <script>
-    Vue.createApp({
+    const app = Vue.createApp({
         data() {
             return {
                 items: [
@@ -36,6 +36,7 @@
                 ]
             }
         },
-    }).mount("#app")
+    })
+    const vm = app.mount("#app")
 </script>
 </html>
