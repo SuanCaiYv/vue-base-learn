@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-2</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <p>每一个通过Vue.createApp()创建的对象称为组件实例。组件实例会通过mount()方法挂载到某个元素上(即DOM中的某个节点上)，得到一个应用实例。</p>
+    <p>挂载到根节点(一般是最外层的div节点(Vue的App都是div作为最外层元素))得到的是整个App。</p>
+    <p>组件实例会暴露出组件的属性(property)，这可以在HTML中被访问到。</p>
+    <p>组件拥有生命周期方法，在组件被创建，被挂载，被更新，被取消挂载的前后调用。生命周期方法中可以通过this访问到组件字段，但是匿名函数不可以访问到this。</p>
+    <div id="app1">
+        {{msg}}
+    </div>
+    <div id="app2">
+        {{msg}}
+    </div>
+</body>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                msg: "我是组件一"
+            }
+        },
+        beforeCreate() {
+            console.log("组件一即将被创建")
+        },
+        mounted() {
+            console.log("组件一被挂载")
+        },
+    }).mount("#app1")
+    Vue.createApp({
+        data() {
+            return {
+                msg: "bbb"
+            }
+        },
+    }).mount("#app2")
+</script>
+</html>
