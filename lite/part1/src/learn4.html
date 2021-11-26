@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-4</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .c1 {
+            color: pink;
+        }
+        .c2 {
+            color: rebeccapurple;
+        }
+        .c3 {
+            background-color: powderblue;
+        }
+        .c4 {
+            color: skyblue;
+        }
+        .c5 {
+            color: thistle;
+        }
+    </style>
+</head>
+
+<body>
+    <p>好！好兄弟们我们来看看，怎么动态切换class属性和style。</p>
+    <div id="app1">
+        <span>直接:class法，通过值是真假来决定是否存在这一class</span>
+        <br>
+        <span :class="{ c1: isC1 }">我是第一段话</span>
+        <br>
+        <span>与传统class并存法</span>
+        <br>
+        <span class="c3" :class="{ c2: isC2 }">我是第二段话</span>
+        <br>
+        <span>通过对象设置法</span>
+        <br>
+        <span :class="isC4">我是第三段话</span>
+        <br>
+        <span>通过计算属性设置法</span>
+        <br>
+        <span :class="isC5">我是第四段话</span>
+        <br>
+        <span>通过数组定义法</span>
+        <br>
+        <span :class="[class1, class2]">我是第五段话</span>
+    </div>
+    <p>对于style的设置大同小异，这里不再阐述。</p>
+</body>
+<script>
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                // 直接返回属性存在与否
+                isC1: true,
+                // 同上
+                isC2: true,
+                // 返回一个对象，对象内部指出class存在与否
+                isC4: {
+                    c4: true
+                },
+                class1: "c2",
+                class2: "c3"
+            }
+        },
+        computed: {
+            // 计算属性返回一个对象，对象内部指出class存在与否
+            isC5() {
+                return {
+                    c5: true
+                }
+            }
+        }
+    }).mount("#app1")
+</script>
+
+</html>
