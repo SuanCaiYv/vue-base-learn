@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-5</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <p>现在我们来看看条件语法，即if-else语句</p>
+    <div id="app1">
+        尝试修改ok1的值试试看？
+        <br>
+        <span v-if="ok1">
+            我被看到啦！
+        </span>
+        <span v-else>
+            我也被看到啦！
+        </span>
+    </div>
+    <p>此外还有if-elseif-elseif...这种语法，大同小异。</p>
+    <p>此外还有v-show，类似v-if，但是它没有对应的v-else。二者区别在于：v-if切换开销更高，v-show初始渲染开销更高(v-if是惰性渲染的)；所以频繁切换选v-show，基本不变选v-if。</p>
+    <p>现在我们来看看列表循环，即v-for，这里我们不推荐v-if和v-for混合使用。</p>
+    <p>v-for不仅支持对数组的遍历，还支持对对象的遍历，对对象遍历会得到(字段名-字段值)这样的键值对。如果此时对数组更新，也会触发重新遍历。</p>
+    <p>此外，为了支持更高效的渲染，对原数组的更新不会触发全部渲染，Vue通过在循环中指定每一个item的key作为唯一标识符来寻找更新的item</p>
+    <div id="app2">
+        注意，我们在这里设置了每一个item的key用来作区分，他们最好是唯一的。
+        <br>
+        循环展开的HTML包含v-for所在的标签。
+        <div v-for="val in array" :key="val.id">
+            <p>{{val.msg}}</p>
+        </div>
+    </div>
+</body>
+<script>
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                ok1: true
+            }
+        },
+    }).mount("#app1")
+    const app2 = Vue.createApp({
+        data() {
+            return {
+                array: [
+                    {
+                        msg: "aaa",
+                        id: 1
+                    },
+                    {
+                        msg: "bbb",
+                        id: 2
+                    },
+                    {
+                        msg: "ccc",
+                        id: 3
+                    }
+                ]
+            }
+        },
+    }).mount("#app2")
+</script>
+</html>
