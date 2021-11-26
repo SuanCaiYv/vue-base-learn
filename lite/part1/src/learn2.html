@@ -13,6 +13,9 @@
     <p>挂载到根节点(一般是最外层的div节点(Vue的App都是div作为最外层元素))得到的是整个App。</p>
     <p>组件实例会暴露出组件的属性(property)，这可以在HTML中被访问到。</p>
     <p>组件拥有生命周期方法，在组件被创建，被挂载，被更新，被取消挂载的前后调用。生命周期方法中可以通过this访问到组件字段，但是匿名函数不可以访问到this。</p>
+    <p>data{}域用来返回一个数据对象(由多个property组成)，此对象会随着应用实例的创建而创建，然后被包裹进$data域。Vue会对$data域中的对象设置响应式操作，任何实例化之后添加的property则不会触发响应式操作。</p>
+    <p>访问应用实例的data的property的方式是Vue.createApp().$data.[property名]，但是Vue为了简单，允许我们直接通过Vue.createApp().[property名]进行访问。</p>
+    <p>除了data{}得到一个包含property的对象之外，还有methods{}，可以得到一个对象，这个对象含有一些方法，这些方法可以通过this访问到data{}返回的对象的property。</p>
     <div id="app1">
         {{msg}}
     </div>
