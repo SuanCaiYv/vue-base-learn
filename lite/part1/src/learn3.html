@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-5</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <p>让我们来设想一种情况，data{}返回的对象有一组互相组合工作的property，且它们很复杂，而且经常更新，我们需要在外部响应式依据这几个property做出更新，应该怎么设计？</p>
+    <p>如果强耦合写在外部，定义一堆property关系是不太合适的，因为降低了阅读性和维护程度。此时我们通过使用计算属性(一个方法)，来完成这一工作。</p>
+    <p>计算属性说白了就是组合property并提供响应式更新的方法，即每次相关的property更新，计算属性的返回值也会更新。</p>
+    <p>计算属性和方法最大的不同在于，它拥有缓存，方法则是每一次渲染都会被调用，计算属性则会缓存结果，除非property发生更新，否则直接返回缓存数据。</p>
+    <p>计算属性默认就是getter，可以通过设置setter实现通过计算属性更新property，现在来看一下实际应用：</p>
+    <div id="app1">
+        {{display}}
+        <br>
+        {{show}}
+        <br>
+        尝试在console通过show更新property
+    </div>
+    <p>计算属性响应property的更新，那如果是我们自定义的数据发生变化，进而触发更新，该怎么实现呢？</p>
+    <p>此时可以使用监听器(原文是侦听器)进行监听，我们以输入为例：</p>
+    <div id="app2">
+        <input v-model="input" placeholder="请输入一个字符串">
+        <br>
+        <span>你输入了: {{msg}}</span>
+    </div>
+</body>
+<script>
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                name: "cwb",
+                age: 21
+            }
+        },
+        // 这里定义计算属性
+        computed: {
+            display() {
+                return this.name + " : " + this.age
+            },
+            // 定义一个计算方法show()并定义它的setter()/getter()
+            show: {
+                set(obj) {
+                    this.name = obj.name
+                    this.age = obj.age
+                },
+                get() {
+                    return this.name + " : " + this.age
+                }
+            }
+        }
+    }).mount("#app1")
+    const app2 = Vue.createApp({
+        data() {
+            return {
+                input: null,
+                // 设置null表示站位，因为必须在data{}中设置才能让Vue包裹进响应式操作
+                msg: null
+            }
+        },
+        // 在这里设置监听器
+        watch: {
+            input(str) {
+                this.msg = str
+            }
+        }
+    }).mount("#app2")
+</script>
+</html>
