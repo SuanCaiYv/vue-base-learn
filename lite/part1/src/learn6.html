@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-6</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        input[type=button] {
+            background-color: white;
+            border: 0.5px solid black;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        span {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>现在我们来看看事件处理，P.S.其实很简单，关于事件和其处理函数的绑定。</p>
+    <p>第一种，直接嵌入JS表达式：</p>
+    <div id="app1">
+        <input type="button" v-on:click="count ++" value="自增按钮">
+        <br>
+        <span>{{count}}</span>
+    </div>
+    <p>第二种，调用方法处理。有一点需要说明，可以在方法中传递参数，而且也可以通过$event作为关键词传递原生DOM事件：</p>
+    <div id="app2">
+        <input type="button" @click="speak('穷狗好穷', $event), log()" value="我是穷狗">
+        <input type="button" @click="speak('小白白白', $event), log()" value="我是小白">
+        <br>
+        <span>{{msg}}</span>
+    </div>
+    <p>此外，还可以的绑定多个方法，简单通过','分割即可，见上。</p>
+</body>
+<script>
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                count: 0
+            }
+        },
+    }).mount("#app1")
+    const app2 = Vue.createApp({
+        data() {
+            return {
+                msg: null
+            }
+        },
+        methods: {
+            speak(val, event) {
+                console.log(event)
+                this.msg = val
+            },
+            log() {
+                console.log("click")
+            }
+        },
+    }).mount("#app2")
+</script>
+
+</html>
