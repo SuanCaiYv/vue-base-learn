@@ -18,24 +18,29 @@
     </div>
 </body>
 <script>
-    const msg = Vue.createApp({
-        props: {
-            val: String
-        },
-        template: `
-        `
-    })
-    const show = Vue.createApp({
-        props: {
-            val: String
-        },
+    const show = {
+        props: ["val"],
         template: `
         <p>{{val}}</p>
         `
-    })
-    msg.component("show", show)
+    }
+    const msg = {
+        props: ["value"],
+        data() {
+            return {
+                msg: "aaa"
+            }
+        },
+        components: {
+            show: show
+        },
+        template: `
+        <show :val="msg"></show>
+        `
+    }
     const app1 = Vue.createApp({})
     app1.component("msg", msg)
+    app1.component("show", show)
     app1.mount("#app1")
 </script>
 </html>
