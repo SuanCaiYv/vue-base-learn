@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-8</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        button {
+            background-color: white;
+            border: 0.5px solid black;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>现在我们来简单看看组件的一些知识，后面我们会详细说明。</p>
+    <p>首先，组件是什么？我们可以把组件理解成自定义元素的实现，即实现了一个组件，并定义了一个同名标签，即可让这个标签完成组件中预置的功能。</p>
+    <p>首先我们来定义一个简单的，自增计数器组件：</p>
+    <div id="app1">
+        <button-counter></button-counter>
+        <p>你也可以应用多次，每次都会触发一个新的组件实例的创建，他们彼此之间隔离，数据域独有。</p>
+        <button-counter></button-counter>
+        <br>
+        <button-counter></button-counter>
+    </div>
+    <p>除此之外，我们还可以使用自定义属性向自定义组件传递数据，不过自定义属性需要事先在props字段中定义：</p>
+    <div id="app2">
+        <div v-for="msg in msgs" :key="msg.id">
+            <show-msg :msg="msg.val"></show-msg>
+        </div>
+    </div>
+    <p>现在我们来尝试使用子组件向父组件传递值，即，组件间通信：</p>
+    <div id="app3">
+        <p>{{counter}}</p>
+        <global-counter @increment-one="deal"></global-counter>
+        <br>
+        <global-counter @increment-one="deal"></global-counter>
+    </div>
+    <p>这里需要注意的是，子组件可以访问父组件的字段和方法，但是无法在自己的方法中访问到父组件的字段。</p>
+    <p>直白点就是，<strong>子组件只能在HTML中访问父组件的字段和方法</strong></p>
+    <p>当然我们还可以让子组件抛出一个值：</p>
+    <div id="app4">
+        <p>{{msg}}</p>
+        <say-hello @say-hello="deal"></say-hello>
+    </div>
+</body>
+<script>
+    const buttonCounter = {
+        data() {
+            return {
+                counter: 0
+            }
+        },
+        template: `
+        <button @click="counter ++">你点击了{{counter}}次</button>
+        `
+    }
+    const app1 = Vue.createApp({})
+    app1.component("button-counter", buttonCounter)
+    app1.mount("#app1")
+
+    const showMsg = {
+        // 自定义组件的自定义属性数组
+        props: ["msg"],
+        template: `
+        <p>{{msg}}</p>
+        `
+    }
+    const app2 = Vue.createApp({
+        data() {
+            return {
+                msgs: [
+                    {
+                        id: 1,
+                        val: "aaa"
+                    },
+                    {
+                        id: 2,
+                        val: "bbb"
+                    },
+                    {
+                        id: 3,
+                        val: "ccc"
+                    }
+                ]
+            }
+        },
+    })
+    app2.component("show-msg", showMsg)
+    app2.mount("#app2")
+
+    const globalCounter = {
+        template: `
+        <button @click="$emit('incrementOne')">加一就完事了</button>
+        `,
+    }
+    const app3 = Vue.createApp({
+        data() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            deal() {
+                this.counter ++
+            }
+        },
+    })
+    app3.component("global-counter", globalCounter)
+    app3.mount("#app3")
+
+    const sayHello = {
+        // 在emit后面传递想要传递的参数
+        template: `
+        <button @click="$emit('sayHello', 'Hi~我是穷狗')">说：你好</button>
+        `
+    }
+    const app4 = Vue.createApp({
+        data() {
+            return {
+                msg: null
+            }
+        },
+        methods: {
+            // 方法这里可以选择接收传递过来的参数
+            deal(val) {
+                this.msg = val
+            }
+        },
+    })
+    app4.component('say-hello', sayHello)
+    app4.mount("#app4")
+</script>
+
+</html>
