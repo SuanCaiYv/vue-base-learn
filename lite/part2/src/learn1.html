@@ -11,31 +11,31 @@
 </head>
 
 <body>
-    <div id="app">
-        <ul>
-            <li v-for="item in items">
-                {{item.msg}}
-            </li>
-        </ul>
+    <div id="app1">
+        <msg val="aaa">
+            <show></show>
+        </msg>
     </div>
 </body>
 <script>
-    Vue.createApp({
-        data() {
-            return {
-                items: [
-                    {
-                        msg: "msl"
-                    },
-                    {
-                        msg: "cwb"
-                    },
-                    {
-                        msg: "somberdog"
-                    }
-                ]
-            }
+    const msg = Vue.createApp({
+        props: {
+            val: String
         },
-    }).mount("#app")
+        template: `
+        `
+    })
+    const show = Vue.createApp({
+        props: {
+            val: String
+        },
+        template: `
+        <p>{{val}}</p>
+        `
+    })
+    msg.component("show", show)
+    const app1 = Vue.createApp({})
+    app1.component("msg", msg)
+    app1.mount("#app1")
 </script>
 </html>
