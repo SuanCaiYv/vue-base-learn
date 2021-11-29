@@ -8,39 +8,84 @@
     <title>LEARN-1</title>
     <link rel="shortcut icon" href="../static/favicon.ico">
     <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
+    <p>
+        任何通过app.component()方法注册的组件，都是全局注册的组件；而通过components: {}属性注册的组件都是局部注册的组件。
+        <br>
+        如果你想在局部注册时实现子组件套用，请不要忘记在父组件的components: {}属性中添加子组件的定义。
+        <br>
+        关于全局注册和局部注册的其他知识，详见注释。
+    </p>
+    <p>
+        关于prop这一块，除了使用数组定义一组props之外，还可以通过对象的形式定义，对象的字段就是prop的名字，字段的值就是对象的类型；
+        <br>
+        此外，还可以的设置默认值，是否必须，验证函数等：
+        <code>
+            <pre>
+                const myComponent = {
+                    props: {
+                        name: String,
+                        age: Number,
+                        skills: Array,
+                        extension: Object,
+                        pass: {
+                            type: String,
+                            required: true,
+                            default: "no-pass",
+                            validator(val) {
+                                // balabala一堆验证的
+                                return true
+                            }
+                        }
+                    }
+                }
+            </pre>
+        </code>
+    </p>
+    <p>
+        关于prop还有一个我们需要注意的，就是直接用=""进行设置的，则取""里面的值为字符串，如果你想把它当成一个JS表达式，则你需要使用v-bind:[prop名]=""进行解析；
+        <br>
+        这里面可以解析的不只是基本类型，还可以是一个对象，或者一个对象的字段等信息，或者是true/false这种字面量。
+    </p>
+    <p>
+        这里顺嘴解释一下非prop，就是如果你在自定义组件使用了一个自定义prop，但是呢，这个prop不在你的组件的props定义中，那么它就会被添加到模板的最外层元素上。可以点开查看器看看下面这个自定义元素被解析成了什么？
+    </p>
     <div id="app1">
-        <msg val="aaa">
-            <show></show>
-        </msg>
+        <my-component val="aaa" my-attr="bbb"></my-component>
     </div>
 </body>
 <script>
-    const show = {
-        props: ["val"],
-        template: `
-        <p>{{val}}</p>
-        `
-    }
-    const msg = {
-        props: ["value"],
-        data() {
-            return {
-                msg: "aaa"
-            }
-        },
+    const component1 = {}
+    const component2 = {
+        // component1成为了component2的子组件
         components: {
-            show: show
-        },
+            "component1": component1
+        }
+    }
+    const appTmp = Vue.createApp({
+        // 局部注册两个组件
+        components: {
+            "component1": component1,
+            "component2": component2
+        }
+    })
+    const myComponent = {
+        props: ["val"],
+
         template: `
-        <show :val="msg"></show>
+        <div>{{val}}</div>
         `
     }
     const app1 = Vue.createApp({})
-    app1.component("msg", msg)
-    app1.component("show", show)
+    app1.component("my-component", myComponent)
     app1.mount("#app1")
 </script>
+
 </html>
