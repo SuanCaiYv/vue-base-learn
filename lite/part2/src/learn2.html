@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-2</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <p>在我们讲自定义事件之前，我们需要先温习一下v-model。v-model本质是一个语法糖，来看看下面两个语句</p>
+    <p>
+        &lt;input type=&quot;text&quot; v-model=&quot;msg&quot;&gt;
+        <br>
+        本质上就等于：
+        <br>
+        &lt;input type=&quot;text&quot; :value=&quot;msg&quot; @input=&quot;msg = $event.target.value&quot;&gt;
+        <br>
+        这里我们可以看到，input[type=text]的v-model会把后面的变量A绑定到value属性上(以解析JS的形式，而不是纯字符串)。同时把input事件的值赋值给这个变量A。
+        <br>
+        现在我们来回忆(其实是我前面没看懂，就没写这句话哈哈哈哈哈)一下官网的对于v-model充当语法糖时的规则：
+        <ul>
+            <li>
+                text和textarea元素使用value属性和input事件；即，:value="[变量A]" @input="[变量A] = $event.target.value"
+            </li>
+            <li>
+                checkbox和radio使用checked属性和change事件；即，:checked="[变量A]" @change="[变量A] = $event.target.value"
+            </li>
+            <li>
+                select将value作为属性并将change作为事件；即，:value="[变量A]" @change="[变量A] = $event.target.value"
+            </li>
+        </ul>
+        <br>
+        而这是默认缺省时的设置，当然，我们可以手动指定v-model绑定到哪个属性，也可以手动设置事件触发。先看属性绑定更改这一说：
+    </p>
+    <div id="app1">
+        <my-input1 v-model:msg="NoMsg"></my-input1>
+        <p>{{msgVal}}</p>
+    </div>
+</body>
+<script>
+    const myInput1 = {
+        props: ["msg"],
+        emits: {
+            update: (val) => {
+                console.log(val)
+                this.msg = val
+            }
+        },
+        template: `
+        <input type="text" :value="msg" @input="$emit('update:msg', $event.target.value)">
+        `
+    }
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                msgVal: null
+            }
+        },
+        methods: {
+            deal(val) {
+                this.msgVal = val
+            }
+        },
+    })
+    app1.component("my-input1", myInput1)
+    app1.mount("#app1")
+</script>
+
+</html>
