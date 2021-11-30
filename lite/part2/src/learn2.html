@@ -24,55 +24,115 @@
         <br>
         &lt;input type=&quot;text&quot; :value=&quot;msg&quot; @input=&quot;msg = $event.target.value&quot;&gt;
         <br>
-        这里我们可以看到，input[type=text]的v-model会把后面的变量A绑定到value属性上(以解析JS的形式，而不是纯字符串)。同时把input事件的值赋值给这个变量A。
+        这里我们可以看到，input[type=text]的v-model会把后面的变量A绑定到value属性上作为初始值(以解析JS的形式，而不是纯字符串)；同时把input事件的值赋值给这个变量A，这里变量A需要提前定义好。
         <br>
         现在我们来回忆(其实是我前面没看懂，就没写这句话哈哈哈哈哈)一下官网的对于v-model充当语法糖时的规则：
-        <ul>
-            <li>
-                text和textarea元素使用value属性和input事件；即，:value="[变量A]" @input="[变量A] = $event.target.value"
-            </li>
-            <li>
-                checkbox和radio使用checked属性和change事件；即，:checked="[变量A]" @change="[变量A] = $event.target.value"
-            </li>
-            <li>
-                select将value作为属性并将change作为事件；即，:value="[变量A]" @change="[变量A] = $event.target.value"
-            </li>
-        </ul>
-        <br>
-        而这是默认缺省时的设置，当然，我们可以手动指定v-model绑定到哪个属性，也可以手动设置事件触发。先看属性绑定更改这一说：
+    <ul>
+        <li>
+            text和textarea元素使用value属性和input事件；即，:value="[变量A]" @input="[变量A] = $event.target.value"
+        </li>
+        <li>
+            checkbox和radio使用checked属性和change事件；即，:checked="[变量A]" @change="[变量A] = $event.target.value"
+        </li>
+        <li>
+            select将value作为属性并将change作为事件；即，:value="[变量A]" @change="[变量A] = $event.target.value"
+        </li>
+    </ul>
+    <br>
+    而这是默认缺省时的设置，当然，我们可以手动指定v-model绑定到哪个属性，也可以手动设置事件触发，除此之外，我们更是可以绑定多个v-model来实现更加方便的操作：
     </p>
     <div id="app1">
-        <my-input1 v-model:msg="NoMsg"></my-input1>
-        <p>{{msgVal}}</p>
+        {{username2}}
+        <br>
+        {{password2}}
+        <br>
+        <!--这一步的意思是，使用username2初始化username1，这也是典型的在HTML中，子组件访问父组件的数据-->
+        <!--这是我猜的：因为父组件的username2已经和子组件的username1绑定，所以更新子组件的username1会同步更新父组件的username2-->
+        <login-in v-model:username1="username2" v-model:password1="password2">
+        </login-in>
+    </div>
+    <p>
+        &lt;my-button v-model:[属性A]=&quot;表达式1&quot;&gt;&lt;/my-button&gt;
+        <br>
+        等价于：
+        <br>
+        &lt;my-button :[属性A]=&quot;表达式1&quot; @update:[属性A]=&quot;表达式1 = $event.target.value&quot;&gt;&lt;/my-button&gt;
+    </p>
+    <p>
+        在这里我们进行一些组件间通信的回顾。子组件可以在模板中访问到父组件的字段和方法，所以如果子组件想要向组件发送数据，可以通过调用方法传参的形式实现
+        <br>
+        或者触发一个事件，然后父组件监听此事件，也可以实现这一效果。
+        <br>
+        父组件可以直接传值给子组件，完成对子组件的数据更新，所以才说Vue是单向数据流，子组件无法直接更新父组件，但是可以通过方法调用实现。
+    </p>
+    <p>
+        接下来我们来看看自定义事件，以及如何在父组件处理这些事件：
+    </p>
+    <div id="app2">
+        <!--父组件在这里监听名为"input"的事件，并调用父组件的处理函数进行处理-->
+        <input-button @input="updateMsg"></input-button>
+        <p>{{msg}}</p>
     </div>
 </body>
 <script>
-    const myInput1 = {
-        props: ["msg"],
-        emits: {
-            update: (val) => {
-                console.log(val)
-                this.msg = val
-            }
+    const loginIn = {
+        props: {
+            username1: String,
+            password1: String
         },
+        // 定义想要触发的事件，由父组件监听并响应
+        emits: ["update:username1", "update:credential1"],
+        // 注意看，这里通过value使用子组件的username1作为初始值，但是username1已经在开始通过username2初始化了，所以我们可以得到想要的来自父组件的初始值
         template: `
-        <input type="text" :value="msg" @input="$emit('update:msg', $event.target.value)">
+        登录名称: <input type="text" :value="username1" @input="$emit('update:username1', $event.target.value)">
+        <br>
+        登录凭证: <input type="text" :value="password1" @input="$emit('update:password1', $event.target.value)">
         `
     }
     const app1 = Vue.createApp({
         data() {
             return {
-                msgVal: null
-            }
-        },
-        methods: {
-            deal(val) {
-                this.msgVal = val
+                username2: "default-username",
+                password2: "123456"
             }
         },
     })
-    app1.component("my-input1", myInput1)
+    app1.component("login-in", loginIn)
     app1.mount("#app1")
+    const InputButton = {
+        emits: {
+            // 这里我们定义了一个自定义事件，并设置验证函数(只返回true/false的函数)
+            input: (val) => {
+                return val !== null && val !== ""
+            }
+        },
+        methods: {
+            dealInput(event) {
+                console.log("deal input")
+                // 触发一个名为"input"的事件
+                this.$emit("input", event.target.value)
+            }
+        },
+        template: `
+        <input type="text" @input="dealInput">
+        `
+    }
+    const app2 = Vue.createApp({
+        data() {
+            return {
+                msg: null
+            }
+        },
+        components: {
+            "input-button": InputButton
+        },
+        methods: {
+            updateMsg(val) {
+                this.msg = val
+            }
+        },
+    })
+    app2.mount("#app2")
 </script>
 
 </html>
