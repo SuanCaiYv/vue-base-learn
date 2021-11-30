@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN-3</title>
+    <link rel="shortcut icon" href="../static/favicon.ico">
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .c1 {
+            color: violet
+        }
+
+        .c2 {
+            color: teal;
+        }
+
+        .c3 {
+            color: thistle;
+        }
+
+        .c4 {
+            color: plum;
+        }
+
+        .c5 {
+            color: mediumpurple;
+        }
+
+        .c6 {
+            color: cornsilk;
+        }
+    </style>
+</head>
+
+<body>
+    <p>好！兄弟们我们来看看占着茅坑不拉屎的slot元素，它表示占位符的意思，你可以在自定义组件的模板中使用它作为占位符，这样就可以在自定义组件外部填充值了！</p>
+    <p>slot可被填充的值不只是字符串，还可以纯HTML源码，不过这会触发它们的解析；当然，slot区域也可以访问组件的data域，也可以被设置默认值。</p>
+    <p>然后嘞，还可以使用带有名字的slot，这样组件可以有多个slot，并按顺序排列，然后在组件外部填充时可以通过指定名字的方式，指出这个内容填充到哪个插槽。</p>
+    <p>此外，如果slot不是直接作为组件子元素出现的，那么我们可能会需要设置字段指出访问的内容。</p>
+    <p>最后则是一些缩写和小Tips，现在一起来看看：</p>
+    <div id="app1">
+        <span-1>cwb</span-1>
+        <br>
+        <span-2>
+            <!--这里使用指定名称来决定替换位置的具名插槽-->
+            <template v-slot:h3>
+                aaa
+            </template>
+            <!--这里使用了缩写形式-->
+            <template #h4>
+                bbb
+            </template>
+            <template #h5>
+                ccc
+            </template>
+        </span-2>
+        <br>
+        <span-3>
+            <template v-slot:default="slotItem">
+                <strong>{{slotItem.index}}: {{slotItem.val}}</strong>
+            </template>
+        </span-3>
+        <p>这里有必要说一下，其实传递给v-slot:default的是一个闭包，它接收一个slot项作为参数，返回运算结果，上面我们直接原封不动的返回了，我们还可以像下面这样：</p>
+        <span-3>
+            <template v-slot:default="{val: msg}">
+                <strong>{{msg}}</strong>
+            </template>
+        </span-3>
+        <p>最后，v-slot:[变量A]写法可以用来指定动态具名插槽的名称</p>
+    </div>
+</body>
+<script>
+    const span1 = {
+        data() {
+            return {
+                msg: "Empty Love."
+            }
+        },
+        // 直接写在slot里面的值就是默认值
+        // 可以访问外组件的data域
+        template: `
+        <span class="c1">{{msg}}: <slot>bbb</slot></span>
+        `
+    }
+    const span2 = {
+        template: `
+        <div class="c2">
+            <h3>
+                <slot name="h3"></slot>
+            </h3>
+            <h4>
+                <slot name="h4"></slot>
+            </h4>
+            <h5>
+                <slot name="h5"></slot>
+            </h5>
+        </div>
+        `
+    }
+    const span3 = {
+        data() {
+            return {
+                list: ["aaa", "bbb", "ccc"]
+            }
+        },
+        template: `
+        <div class="c3">
+            <div v-for="(val, idx) in list">
+                <!--这里面可以指定多个想要绑定的值-->
+                <!--绑定语法是：:变量A="入参A" :变量B="入参B" ...-->
+                <slot :val="val" :index="idx"></slot>
+            </div>
+        </div>
+        `
+    }
+    const app1 = Vue.createApp({
+        components: {
+            "span-1": span1,
+            "span-2": span2,
+            "span-3": span3
+        }
+    })
+    app1.mount("#app1")
+</script>
+
+</html>
