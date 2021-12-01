@@ -18,8 +18,109 @@
         好兄弟们，我们来看看怎么实现跨组件传值。
         <br>
         父组件给子组件传值一般使用子组件属性传值来实现，那如果跨多个嵌套组件传值呢？这种方法未免显得有些笨拙了。
+        <br>
+        下面是一个简单的示例，你可以在控制台输入并运行：<code>app1._component.components["c-1"].data().val1 = "ccc"</code>，你会发现，值并没有更新。
+        <br>
+        这是因为provide/inject默认是非响应式的，我们可以使用计算属性包装provide来实现响应式操作！
     </p>
+    <p>这里是普通的做法：</p>
+    <div id="app1">
+        <c-1>
+        </c-1>
+    </div>
+    <p>这里是响应式做法：</p>
+    <div id="app2">
+        <l-1></l-1>
+    </div>
 </body>
 <script>
+    const c3 = {
+        inject: ["msg1", "msg2"],
+        template: `
+        <p>{{msg1}}</p>
+        <p>{{msg2}}</p>
+        `
+    }
+    const c2 = {
+        components: {
+            "c-3": c3
+        },
+        template: `
+        <c-3></c-3>
+        `
+    }
+    const c1 = {
+        components: {
+            "c-2": c2
+        },
+        data() {
+            return {
+                val1: "aaa",
+                val2: "bbb"
+            }
+        },
+        provide() {
+            return {
+                msg1: this.val1,
+                msg2: this.val2
+            }
+        },
+        template: `
+        <c-2></c-2>
+        `
+    }
+    const app1 = Vue.createApp({
+        components: {
+            "c-1": c1,
+            "c-2": c2,
+            "c-3": c3
+        }
+    })
+    app1.mount("#app1")
+    const l3 = {
+        inject: ["msg"],
+        template: `
+        <p>{{msg}}</p>
+        `
+    }
+    const l2 = {
+        components: {
+            "l-3": l3
+        },
+        template: `
+        <l-3></l-3>
+        `
+    }
+    const l1 = {
+        components: {
+            "l-2": l2
+        },
+        data() {
+            return {
+                val: "aaa"
+            }
+        },
+        provide() {
+            return {
+                msg: Vue.computed(() => this.val)
+            }
+        },
+        methods: {
+            update(val) {
+                this.val = val
+            }
+        },
+        template: `
+        <l-2></l-2>
+        `
+    }
+    const app2 = Vue.createApp({
+        components: {
+            "l-1": l1,
+            "l-2": l2,
+            "l-3": l3
+        }
+    })
+    app2.mount("#app2")
 </script>
 </html>
