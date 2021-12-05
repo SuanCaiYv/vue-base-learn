@@ -4,9 +4,58 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>LEARN-1</title>
   </head>
   <body>
+    <p>到目前为止，我们学习了Vue组件的用法，现在来回顾一下：</p>
+    <ul>
+      <li>
+        data域：定义组件需要的变量(即组件字段)。
+      </li>
+      <li>
+        props域：定义接收父组件传递过来的值的变量(即组件属性)。
+      </li>
+      <li>
+        computed域：压缩复杂字段计算和组合方式为一个或多个方法，且带有缓存效果。
+      </li>
+      <li>
+        methods域：定义组件方法，每次调用都会执行，不带缓存(即普通函数)。
+      </li>
+      <li>
+        emits域：定义组件事件，用来以冒泡事件方式向外发出，进而被父组件接收，实现向父组件传值或调用父组件的行为，与props相对的。
+      </li>
+      这里需要说一下，就是父组件触发子组件事件可以由props被更新实现，因为Vue组件可以设置响应式字段，所以父组件更新props会有相应的方法被触发。
+    </ul>
+    <p>然后Vue3为了实现逻辑和功能的统一，引入了setup函数。这个函数相当于beforeCreate和created，准确来说略早于created。所以在这里你访问不到data等域，只能访问到：</p>
+    <ul>
+      <li>props</li>
+      <li>emits</li>
+      <li>slots</li>
+      <li>attrs</li>
+    </ul>
+    <p>引入setup的另一个原因是为了更好地结合Composition API使用，如果想要暴露变量，方法，计算属性等，可以直接在setup中返回，即可在组件上下文中使用。详见<a href="./src/components/TemplateVueFile.vue">这个模板文件</a></p>
+    <br>
+    <p>众所周知，懒是人类进步的阶梯，每次定义一堆东西返回太麻烦了，于是Vue3引入了script setup，即在这里声明的任何变量和方法，都会自动返回暴露给组件；
+      <br>
+      而且也不用defineComponent，直接在需要使用的地方import即可，即整个组件会被直接暴露出去。
+      <br>
+      那你可能会问，使用了script setup之后，我怎么访问到上面四个可访问域呢？毕竟这是一个script域，没有入参，以前的setup函数还可以的使用接收参数的方式进行访问。
+      <br>
+      答案是使用的defineProps()和defineEmits()进行设置props和emits，使用useSolts()和useAttrs()进行访问solts和attrs。这样就可以起到和setup()函数传参一样的作用了。
+    </p>
+    <br>
+    <p>现在我们来看看所谓的Composition API是怎么用的，以及Vue3一直在强调的响应式变量。</p>
+    <p>通过ref()直接把基本类型变成响应式对象，并通过生成的对象的value字段来访问，reactive()直接把对象或数组变成响应式对象，然后对其读取和写入就像普通对象一样；
+      <br>
+      但是尤为重要的一点是，就是在操作数组时，只能使用那些不会更改数组引用的操作，此外，还不能对对象解构，否则会取消响应性。
+      <br>
+      还有两个方法：toRef()和toRefs，前者把响应式对象某个字段编程响应式类型，即ref()处理过的，后者把所有字段变成响应式字段，并包装进一个对象返回。
+      <br>
+      在setup中还能设置watch和computed，watch()接收两个参数，第一个是需要监听的变量，第二个是处理函数，处理函数除了默认为空，还可以接收两个参数，一个是新值，一个是旧值；
+      <br>
+      computed()也可以设置setter和getter，和Vue2差不多，但是注意，他的返回值是ref的，即需要.value才能访问到值。
+    </p>
+    <p>所以接下来，我们主要看怎么实现Vue3+Composition API下实现一些组件间通信，使用基础组件组成复杂组件等一些项目基础。</p>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
