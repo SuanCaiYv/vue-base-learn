@@ -1,8 +1,10 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 </script>
 
 <template>
-    <router-view></router-view>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </template>
 
 <style>
@@ -11,7 +13,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 6px;
 }
 </style>
