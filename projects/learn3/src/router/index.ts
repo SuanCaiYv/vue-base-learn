@@ -18,6 +18,12 @@ const routes: Array<RouteRecordRaw> = [
                 path: "v-e",
                 name: "v-e",
                 component: () => import("../views/FatherSon/WithVModelEmitsF.vue")
+            },
+            // ref-emits形式，不好用
+            {
+                path: "r-e",
+                name: "r-e",
+                component: () => import("../views/FatherSon/WithRefEmitsF.vue")
             }
         ]
     }
