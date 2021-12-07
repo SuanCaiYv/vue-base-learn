@@ -8,6 +8,8 @@
 import {ref} from "vue"
 
 const name = ref<String>("Home")
+
+// ref(1) === reactive({value: 1})
 </script>
 
 <style scoped>

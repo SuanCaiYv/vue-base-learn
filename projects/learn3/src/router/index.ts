@@ -1,6 +1,16 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
+    {
+        path: "/home",
+        name: "home",
+        component: () => import("../views/Home.vue")
+    },
+    {
+        path: "/",
+        redirect: "/home",
+        component: () => import("../views/Home.vue")
+    },
     // 父子组件通信的几种方式
     {
         path: "/f-s",
@@ -26,6 +36,12 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../views/FatherSon/WithRefEmitsF.vue")
             }
         ]
+    },
+    {
+        path: "/g-f-s",
+        name: "g-f-s",
+        component: () => import("../views/Home.vue"),
+        children: []
     }
 ]
 
