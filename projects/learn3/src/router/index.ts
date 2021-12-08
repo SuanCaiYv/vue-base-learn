@@ -41,7 +41,18 @@ const routes: Array<RouteRecordRaw> = [
         path: "/g-f-s",
         name: "g-f-s",
         component: () => import("../views/Home.vue"),
-        children: []
+        children: [
+            {
+                path: "p-i",
+                name: "p-i",
+                component: () => import("../views/GrandFatherGrandSon/WithProvideInjectF.vue")
+            },
+            {
+                path: "p-i-r",
+                name: "p-i-r",
+                component: () => import("../views/GrandFatherGrandSon/WIthProvideInjectReactiveF.vue")
+            }
+        ]
     }
 ]
 
