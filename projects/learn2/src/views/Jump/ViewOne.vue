@@ -2,7 +2,7 @@
     <div>
         我是视图一
         <br>
-        {{msg}}
+        {{ msg }}
         <br>
         <button @click="jump">跳转至视图二</button>
         <br>
@@ -10,7 +10,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {ref} from "vue"
 import {useRoute, useRouter} from "vue-router";
 
@@ -22,7 +22,7 @@ const route = useRoute()
 // 通过route访问路由信息
 const path = route.matched
 const msg = ref<String>(String(route.params.msg))
-for (let i = 0; i < path.length; ++ i) {
+for (let i = 0; i < path.length; ++i) {
     // 在这里可以访问到从父级到当前路由的路径信息
     console.log(path[i].path)
 }
@@ -30,14 +30,14 @@ for (let i = 0; i < path.length; ++ i) {
 // 通过router进行跳转，并携带参数
 const jump = (): void => {
     router.push({
-        name: "view-two",
+        name: "views-two",
         params: {
             msg: "我来自试图一"
         }
     })
 }
 // 通过router进行回退
-const back = ():void => {
+const back = (): void => {
     router.back()
 }
 </script>
