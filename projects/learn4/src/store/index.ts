@@ -32,7 +32,7 @@ const store: Store<any> = createStore({
             return state.list.length
         },
         // 返回方法的计算属性，不会缓存值，每次调用返回的方法，都会触发新的计算。
-        findIdx: (state) => (idx) => {
+        findIdx: (state) => (idx: any) => {
             return state.list[idx]
         }
     }
