@@ -56,18 +56,18 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/Home.vue"),
         children: [
             {
-                path: "view-one",
-                name: "view-one",
+                path: "views-one",
+                name: "views-one",
                 component: () => import("../views/Jump/ViewOne.vue")
             },
             {
-                path: "view-two",
-                name: "view-two",
+                path: "views-two",
+                name: "views-two",
                 component: () => import("../views/Jump/ViewTwo.vue")
             },
             {
-                path: "view-three",
-                name: "view-three",
+                path: "views-three",
+                name: "views-three",
                 component: () => import("../views/Jump/ViewThree.vue")
             }
         ]
