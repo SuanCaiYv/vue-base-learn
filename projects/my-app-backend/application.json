@@ -1,4 +1,5 @@
 {
+  "owner": "2508826394@qq.com",
   "database": {
     "url": "mongodb://127.0.0.1",
     "port": 27017,
@@ -22,6 +23,18 @@
     {
       "name": "reader",
       "desc": "阅览者"
+    }
+  ],
+  "accounts": [
+    {
+      "username": "2508826394@qq.com",
+      "credential": "123456",
+      "ver_code": "314709"
+    },
+    {
+      "username": "2021601470@qq.com",
+      "credential": "123123",
+      "ver_code": "784603"
     }
   ]
 }

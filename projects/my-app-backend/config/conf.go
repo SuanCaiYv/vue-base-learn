@@ -24,9 +24,11 @@ func init() {
 var configObject map[string]interface{}
 
 type Configuration struct {
+	Owner          string
 	DatabaseConfig *DatabaseConfig
 	RedisConfig    *RedisConfig
 	Roles          []Role
+	Accounts       []Account
 }
 
 type DatabaseConfig struct {
@@ -51,6 +53,12 @@ type Role struct {
 	Desc string
 }
 
+type Account struct {
+	Username   string
+	Credential string
+	VerCode    string
+}
+
 func NewConfiguration() *Configuration {
 	database := configObject["database"].(map[string]interface{})
 	tmpRoles := configObject["roles"].([]interface{})
@@ -63,7 +71,18 @@ func NewConfiguration() *Configuration {
 		})
 	}
 	redis := configObject["redis"].(map[string]interface{})
+	tmpAccounts := configObject["accounts"].([]interface{})
+	accounts := make([]Account, 0, len(tmpAccounts))
+	for _, val := range tmpAccounts {
+		tmpAccount := val.(map[string]interface{})
+		accounts = append(accounts, Account{
+			Username:   tmpAccount["username"].(string),
+			Credential: tmpAccount["credential"].(string),
+			VerCode:    tmpAccount["ver_code"].(string),
+		})
+	}
 	return &Configuration{
+		Owner: configObject["owner"].(string),
 		DatabaseConfig: &DatabaseConfig{
 			Url:      database["url"].(string),
 			Port:     int(database["port"].(float64)),
@@ -79,6 +98,7 @@ func NewConfiguration() *Configuration {
 			User:     redis["user"].(string),
 			Password: redis["password"].(string),
 		},
-		Roles: roles,
+		Roles:    roles,
+		Accounts: accounts,
 	}
 }

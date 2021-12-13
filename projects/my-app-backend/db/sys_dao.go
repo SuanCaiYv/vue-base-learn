@@ -4,7 +4,6 @@ import (
 	context2 "context"
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -90,8 +89,31 @@ func (s *SysUserDaoService) Delete(id string) error {
 }
 
 func (s *SysUserDaoService) SelectByUsername(username string) (*entity.SysUser, error) {
-	//TODO implement me
-	panic("implement me")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	cursor, err := s.collection.Find(ctx, primitive.M{"username": username})
+	if err != nil {
+		s.logger.Error(err)
+	}
+	defer func(cursor *mongo.Cursor, ctx context2.Context) {
+		err := cursor.Close(ctx)
+		if err != nil {
+			s.logger.Error(err)
+		}
+	}(cursor, ctx)
+	var result *entity.SysUser = nil
+	for cursor.Next(ctx) {
+		sysUser := entity.SysUser{}
+		err := cursor.Decode(&sysUser)
+		if err != nil {
+			return nil, err
+		}
+		result = &sysUser
+	}
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 func (s *SysUserDaoService) SelectByNickname(nickname string) (*entity.SysUser, error) {
@@ -133,7 +155,7 @@ func (s *SysRoleDaoService) Select(id string) (*entity.SysRole, error) {
 func (s *SysRoleDaoService) SelectByName(name string) (*entity.SysRole, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	cursor, err := s.collection.Find(ctx, bson.D{0: {"name", name}})
+	cursor, err := s.collection.Find(ctx, primitive.M{"name": name})
 	if err != nil {
 		log.Fatal(err)
 	}

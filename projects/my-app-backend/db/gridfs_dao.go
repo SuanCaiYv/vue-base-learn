@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/gridfs"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -20,11 +21,11 @@ type GridFSDaoService struct {
 }
 
 type GridFSDao interface {
-	UploadFile(fileContent []byte, filename string) error
+	UploadFile(fileContent []byte, filename string, meteData map[string]interface{}) error
 
 	ModifyFile(file os.File) error
 
-	DownloadFile(filename string) ([]byte, error)
+	DownloadFile(filename string) ([]byte, map[string]interface{}, error)
 
 	DeleteFile(filename string) error
 }
@@ -45,18 +46,23 @@ func NewGridFSDaoService() *GridFSDaoService {
 	}
 }
 
-func (g *GridFSDaoService) UploadFile(fileContent []byte, filename string) error {
-	uploadStream, err := g.bucket.OpenUploadStream(filename)
+func (g *GridFSDaoService) UploadFile(fileContent []byte, filename string, metaData primitive.M) error {
+	// 设置自定义元数据
+	option := options.GridFSUpload()
+	option.SetMetadata(metaData)
+	// 打开上传流，其实就是Insert Files，这里面的option用于设置Files的meta字段，打开流就是初始化Files一条记录的过程
+	// Files负责管理文件分片，即chunks表
+	uploadStream, err := g.bucket.OpenUploadStream(filename, option)
 	defer func(uploadStream *gridfs.UploadStream) {
 		_ = uploadStream.Close()
 	}(uploadStream)
 	if err != nil {
-		g.logger.Error("打开GridFS上传流失败")
+		g.logger.Errorf("打开GridFS上传流失败: %v", err)
 		return err
 	}
 	_, err = uploadStream.Write(fileContent)
 	if err != nil {
-		g.logger.Error("上传文件至GridFS失败")
+		g.logger.Errorf("上传文件至GridFS失败: %v", err)
 		return err
 	}
 	return nil
@@ -67,23 +73,58 @@ func (g *GridFSDaoService) ModifyFile(file os.File) error {
 	panic("implement me")
 }
 
-func (g *GridFSDaoService) DownloadFile(filename string) ([]byte, error) {
-	downloadStream, err := g.bucket.OpenDownloadStreamByName(filename)
+func (g *GridFSDaoService) DownloadFile(filename string) ([]byte, map[string]interface{}, error) {
+	ctx, cancel := context2.WithTimeout(context2.Background(), 2*time.Second)
+	defer cancel()
+	// 以文件名作为字段查找Files，目的是为了获取它保存的我们自定义的元数据
+	cursor, err := g.bucket.GetFilesCollection().Find(ctx, bson.M{"filename": filename})
+	if err != nil {
+		g.logger.Errorf("查找files失败，文件名: %s", filename)
+		return nil, nil, err
+	}
+	defer func(cursor *mongo.Cursor, ctx context2.Context) {
+		err := cursor.Close(ctx)
+		if err != nil {
+			g.logger.Error(err)
+		}
+	}(cursor, ctx)
+	var gFile *gridfs.File = nil
+	for cursor.Next(ctx) {
+		file := gridfs.File{}
+		err := cursor.Decode(&file)
+		if err != nil {
+			return nil, nil, err
+		}
+		gFile = &file
+	}
+	if gFile == nil {
+		return nil, nil, nil
+	}
+	// 通过文件Id找到所有文件切片并下载，也可以通过传递文件名实现，传递文件名的实现类似我们上面的写法
+	downloadStream, err := g.bucket.OpenDownloadStream(gFile.ID)
 	defer func(downloadStream *gridfs.DownloadStream) {
 		_ = downloadStream.Close()
 	}(downloadStream)
 	if err != nil {
-		g.logger.Error("打开下载流失败")
-		return nil, err
+		g.logger.Errorf("打开下载流失败: %v", err)
+		return nil, nil, err
 	}
 	size := downloadStream.GetFile().Length
 	data := make([]byte, size, size)
+	// 反序列化元数据
 	_, err = downloadStream.Read(data)
 	if err != nil {
-		g.logger.Error("读取文件失败")
-		return nil, err
+		g.logger.Errorf("读取文件失败: %v", err)
+		return nil, nil, err
 	}
-	return data, nil
+	meta := gFile.Metadata
+	meteData := make(map[string]interface{})
+	err = bson.Unmarshal(meta, &meteData)
+	if err != nil {
+		g.logger.Error(err)
+		return nil, nil, err
+	}
+	return data, meteData, nil
 }
 
 func (g *GridFSDaoService) DeleteFile(filename string) error {
@@ -94,6 +135,12 @@ func (g *GridFSDaoService) DeleteFile(filename string) error {
 		g.logger.Errorf("查找files失败，文件名: %s", filename)
 		return err
 	}
+	defer func(cursor *mongo.Cursor, ctx context2.Context) {
+		err := cursor.Close(ctx)
+		if err != nil {
+			g.logger.Error(err)
+		}
+	}(cursor, ctx)
 	var gFile *gridfs.File = nil
 	for cursor.Next(ctx) {
 		file := gridfs.File{}

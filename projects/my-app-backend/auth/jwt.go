@@ -88,7 +88,7 @@ func ValidToken(token string) (username string, role string, err error) {
 	})
 	if err != nil {
 		logger.Errorf("解析Token失败: %v", err)
-		return "", "", nil
+		return "", "", err
 	}
 	if claims, ok := parsedToken.Claims.(*jwt.RegisteredClaims); ok {
 		username = claims.ID

@@ -33,15 +33,20 @@ func DefaultSysUser() *SysUser {
 		Salt:       util.GenerateUUID(),
 		Role:       "default-role",
 		Info: UserInfo{
-			Avatar:    "default-avatar",
-			Nickname:  "default-nickname" + util.GenerateUUID(),
-			Email:     "default-email" + util.GenerateUUID(),
-			Phone:     "default-phone" + util.GenerateUUID(),
-			WeChat:    "default-wechat" + util.GenerateUUID(),
-			QQ:        "default-qq" + util.GenerateUUID(),
-			GitHub:    "default-github" + util.GenerateUUID(),
-			Location:  "default-location" + util.GenerateUUID(),
-			Signature: "default-signature" + util.GenerateUUID(),
+			Avatar:    "default-avatar.jpg",
+			Nickname:  "default-nickname-" + util.GenerateUUID(),
+			Email:     "default-email",
+			Phone:     "10086",
+			WeChat:    "d2508826394",
+			QQ:        "2508826394",
+			GitHub:    "github.com/SuanCaiYv",
+			Location:  "HangZhou-China",
+			Signature: "Golang is best!",
 		},
 	}
 }
+
+const (
+	RoleOwner  = "owner"
+	RoleReader = "reader"
+)
