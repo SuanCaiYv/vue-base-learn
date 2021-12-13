@@ -49,7 +49,7 @@ type SysRoleDao interface {
 
 func NewSysUserDaoService() *SysUserDaoService {
 	logger := util.NewLogger()
-	config := config2.NewConfiguration()
+	config := config2.ApplicationConfiguration()
 	ctx, cancel := context2.WithTimeout(context2.Background(), 2*time.Second)
 	defer cancel()
 	url := fmt.Sprintf("%s:%d", config.DatabaseConfig.Url, config.DatabaseConfig.Port)
@@ -123,7 +123,7 @@ func (s *SysUserDaoService) SelectByNickname(nickname string) (*entity.SysUser, 
 
 func NewSysRoleDaoService() *SysRoleDaoService {
 	logger := util.NewLogger()
-	config := config2.NewConfiguration()
+	config := config2.ApplicationConfiguration()
 	ctx, cancel := context2.WithTimeout(context2.Background(), 2*time.Second)
 	defer cancel()
 	url := fmt.Sprintf("%s:%d", config.DatabaseConfig.Url, config.DatabaseConfig.Port)

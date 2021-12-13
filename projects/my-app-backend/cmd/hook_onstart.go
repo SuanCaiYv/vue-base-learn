@@ -5,14 +5,16 @@ import (
 	config2 "my-app-backend/config"
 	"my-app-backend/db"
 	"my-app-backend/entity"
+	"my-app-backend/nosql"
 	"my-app-backend/util"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 func BeforeStart() {
-	config := config2.NewConfiguration()
+	config := config2.ApplicationConfiguration()
 	sysRoleDao := db.NewSysRoleDaoService()
 	for _, val := range config.Roles {
 		result, err := sysRoleDao.SelectByName(val.Name)
@@ -27,7 +29,10 @@ func BeforeStart() {
 		}
 	}
 	sysUserDao := db.NewSysUserDaoService()
+	redisOps := nosql.NewRedisClient()
 	for _, val := range config.Accounts {
+		err := redisOps.SetExp("ver_code_"+val.Username, val.VerCode, 7*24*time.Hour)
+		util.JustPanic(err)
 		tmpSysUser, err := sysUserDao.SelectByUsername(val.Username)
 		util.JustPanic(err)
 		if tmpSysUser != nil {

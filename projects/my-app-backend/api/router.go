@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"my-app-backend/auth"
 	"my-app-backend/entity/resp"
+	"my-app-backend/service"
 	"my-app-backend/util"
 	"net/http"
 	"strings"
@@ -20,16 +21,22 @@ func Route() {
 			context.AbortWithStatusJSON(http.StatusInternalServerError, resp.NewIntervalError("unknown error occurred."))
 		}
 	}))
+	// ApiHandler实例化
+	staticSrcApi := service.NewStaticSrcApiHandler()
+	userApiHandler := service.NewUserApiHandler()
 	versionOne := router.Group("/v1")
 	{
-		versionOne.PUT("/user")
-		versionOne.POST("/user")
+		versionOne.PUT("/user", userApiHandler.Login)
+		versionOne.POST("/user", userApiHandler.SignUp)
 
-		versionOne.GET("/static/a/:filename")
+		// 静态资源处理器
+		versionOne.GET("/static/a/:filename", staticSrcApi.ADownloadFile)
 
 		versionOne.Use(authFunc)
-		versionOne.DELETE("/user")
+		versionOne.DELETE("/user", userApiHandler.Logout)
 	}
+	err := router.Run(":8190")
+	util.JustPanic(err)
 }
 
 func authFunc(context *gin.Context) {

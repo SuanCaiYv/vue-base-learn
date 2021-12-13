@@ -28,7 +28,7 @@ type RedisOps interface {
 
 func NewRedisClient() *RedisClient {
 	logger := util.NewLogger()
-	config := config2.NewConfiguration()
+	config := config2.ApplicationConfiguration()
 	client := redis.NewClient(&redis.Options{
 		Network:  "tcp",
 		Addr:     fmt.Sprintf("%s:%d", config.RedisConfig.Url, config.RedisConfig.Port),

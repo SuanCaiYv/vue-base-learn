@@ -6,6 +6,6 @@ import (
 )
 
 func TestNewConfiguration(t *testing.T) {
-	obj := NewConfiguration()
+	obj := ApplicationConfiguration()
 	fmt.Println(obj.Roles)
 }

@@ -21,18 +21,18 @@ type GridFSDaoService struct {
 }
 
 type GridFSDao interface {
-	UploadFile(fileContent []byte, filename string, meteData map[string]interface{}) error
+	UploadFile(fileContent []byte, filename string, metaData primitive.M) error
 
 	ModifyFile(file os.File) error
 
-	DownloadFile(filename string) ([]byte, map[string]interface{}, error)
+	DownloadFile(filename string) ([]byte, primitive.M, error)
 
 	DeleteFile(filename string) error
 }
 
 func NewGridFSDaoService() *GridFSDaoService {
 	logger := util.NewLogger()
-	config := config2.NewConfiguration()
+	config := config2.ApplicationConfiguration()
 	ctx, cancel := context2.WithTimeout(context2.Background(), 2*time.Second)
 	defer cancel()
 	url := fmt.Sprintf("%s:%d", config.DatabaseConfig.Url, config.DatabaseConfig.Port)
@@ -73,7 +73,7 @@ func (g *GridFSDaoService) ModifyFile(file os.File) error {
 	panic("implement me")
 }
 
-func (g *GridFSDaoService) DownloadFile(filename string) ([]byte, map[string]interface{}, error) {
+func (g *GridFSDaoService) DownloadFile(filename string) ([]byte, primitive.M, error) {
 	ctx, cancel := context2.WithTimeout(context2.Background(), 2*time.Second)
 	defer cancel()
 	// 以文件名作为字段查找Files，目的是为了获取它保存的我们自定义的元数据

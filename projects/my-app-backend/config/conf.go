@@ -17,11 +17,52 @@ func init() {
 	bytes := make([]byte, fileInfo.Size(), fileInfo.Size())
 	_, err = confFile.Read(bytes)
 	util.JustPanic(err)
+	configObject := make(map[string]interface{})
 	err = json.Unmarshal(bytes, &configObject)
 	util.JustPanic(err)
-}
 
-var configObject map[string]interface{}
+	database := configObject["database"].(map[string]interface{})
+	tmpRoles := configObject["roles"].([]interface{})
+	roles := make([]Role, 0, len(tmpRoles))
+	for _, val := range tmpRoles {
+		role := val.(map[string]interface{})
+		roles = append(roles, Role{
+			Name: role["name"].(string),
+			Desc: role["desc"].(string),
+		})
+	}
+	redis := configObject["redis"].(map[string]interface{})
+	tmpAccounts := configObject["accounts"].([]interface{})
+	accounts := make([]Account, 0, len(tmpAccounts))
+	for _, val := range tmpAccounts {
+		tmpAccount := val.(map[string]interface{})
+		accounts = append(accounts, Account{
+			Username:   tmpAccount["username"].(string),
+			Credential: tmpAccount["credential"].(string),
+			VerCode:    tmpAccount["ver_code"].(string),
+		})
+	}
+	config = &Configuration{
+		Owner: configObject["owner"].(string),
+		DatabaseConfig: &DatabaseConfig{
+			Url:      database["url"].(string),
+			Port:     int(database["port"].(float64)),
+			DB:       database["db"].(string),
+			GridFSDB: database["grid_fs_db"].(string),
+			User:     database["user"].(string),
+			Password: database["password"].(string),
+		},
+		RedisConfig: &RedisConfig{
+			Url:      redis["url"].(string),
+			Port:     int(redis["port"].(float64)),
+			DB:       int(redis["db"].(float64)),
+			User:     redis["user"].(string),
+			Password: redis["password"].(string),
+		},
+		Roles:    roles,
+		Accounts: accounts,
+	}
+}
 
 type Configuration struct {
 	Owner          string
@@ -59,46 +100,8 @@ type Account struct {
 	VerCode    string
 }
 
-func NewConfiguration() *Configuration {
-	database := configObject["database"].(map[string]interface{})
-	tmpRoles := configObject["roles"].([]interface{})
-	roles := make([]Role, 0, len(tmpRoles))
-	for _, val := range tmpRoles {
-		role := val.(map[string]interface{})
-		roles = append(roles, Role{
-			Name: role["name"].(string),
-			Desc: role["desc"].(string),
-		})
-	}
-	redis := configObject["redis"].(map[string]interface{})
-	tmpAccounts := configObject["accounts"].([]interface{})
-	accounts := make([]Account, 0, len(tmpAccounts))
-	for _, val := range tmpAccounts {
-		tmpAccount := val.(map[string]interface{})
-		accounts = append(accounts, Account{
-			Username:   tmpAccount["username"].(string),
-			Credential: tmpAccount["credential"].(string),
-			VerCode:    tmpAccount["ver_code"].(string),
-		})
-	}
-	return &Configuration{
-		Owner: configObject["owner"].(string),
-		DatabaseConfig: &DatabaseConfig{
-			Url:      database["url"].(string),
-			Port:     int(database["port"].(float64)),
-			DB:       database["db"].(string),
-			GridFSDB: database["grid_fs_db"].(string),
-			User:     database["user"].(string),
-			Password: database["password"].(string),
-		},
-		RedisConfig: &RedisConfig{
-			Url:      redis["url"].(string),
-			Port:     int(redis["port"].(float64)),
-			DB:       int(redis["db"].(float64)),
-			User:     redis["user"].(string),
-			Password: redis["password"].(string),
-		},
-		Roles:    roles,
-		Accounts: accounts,
-	}
+var config *Configuration
+
+func ApplicationConfiguration() *Configuration {
+	return config
 }

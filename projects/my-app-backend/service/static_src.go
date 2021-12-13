@@ -2,11 +2,12 @@ package service
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"my-app-backend/db"
+	"my-app-backend/util"
 	"net/http"
+	"path/filepath"
 )
 
 type StaticSrcApi interface {
@@ -18,6 +19,13 @@ type StaticSrcApiHandler struct {
 	logger    *logrus.Logger
 }
 
+func NewStaticSrcApiHandler() *StaticSrcApiHandler {
+	return &StaticSrcApiHandler{
+		gridFsDao: db.NewGridFSDaoService(),
+		logger:    util.NewLogger(),
+	}
+}
+
 func (s *StaticSrcApiHandler) ADownloadFile(context *gin.Context) {
 	filename := context.Param("filename")
 	data, _, err := s.gridFsDao.DownloadFile(filename)
@@ -26,16 +34,15 @@ func (s *StaticSrcApiHandler) ADownloadFile(context *gin.Context) {
 		context.AbortWithStatus(500)
 	}
 	reader := bytes.NewReader(data)
-	contentLength := response.ContentLength
-	contentType := response.Header.Get("Content-Type")
+	contentLength := len(data)
+	// TODO 暂时只让支持图片，其他静态资源可以写个资源类型根判断函数实现
+	contentType := "image/" + filepath.Ext(filename)[1:]
 
 	extraHeaders := map[string]string{
-		"Content-Disposition": `attachment; filename="gopher.png"`,
+		"Content-Disposition": "attachment; filename=" + `"` + filename + `"`,
 	}
 
-	context.DataFromReader(http.StatusOK, contentLength, contentType, reader, extraHeaders)
-	//TODO implement me
-	panic("implement me")
+	context.DataFromReader(http.StatusOK, int64(contentLength), contentType, reader, extraHeaders)
 }
 
 func (*StaticSrcApiHandler) f() {}
