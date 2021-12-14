@@ -5,20 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/service/static_src_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/user_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entity/resp/http_resp.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/article.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/default-avatar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/router_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/static_src.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.json" beforeDir="false" afterPath="$PROJECT_DIR$/application.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/auth/jwt.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/hook_onstart.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/hook_onstart.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/hook_onstart_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/hook_onstart_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/conf.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/conf.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/article_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/article_dao.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/gridfs_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/gridfs_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/gridfs_dao_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/gridfs_dao_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/sys_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sys_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nosql/redis_ops.go" beforeDir="false" afterPath="$PROJECT_DIR$/nosql/redis_ops.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/static_src.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/static_src.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sys_dao_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sys_dao_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/sys.go" beforeDir="false" afterPath="$PROJECT_DIR$/entity/sys.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +40,9 @@
         <option value="Go File" />
       </list>
     </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
   </component>
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
@@ -50,6 +62,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+  </component>
   <component name="ProjectId" id="228XpcPDHZTVj48DujhWHbY8HEL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -60,9 +75,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.format.on.save.advertiser.fired" value="true" />
     <property name="go.formatter.settings.were.checked" value="true" />
@@ -70,13 +87,18 @@
     <property name="go.modules.go.list.on.any.changes.was.set" value="true" />
     <property name="go.watchers.conflict.with.on.save.actions.check.performed" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="rearrange.code.on.save" value="true" />
+    <property name="settings.editor.selected.configurable" value="actions.on.save" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/service" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestUserApiHandler_SignUp in my-app-backend/service">
+  <component name="RunManager" selected="Go Test.TestGridFSDaoService_DownloadFile in my-app-backend/db">
     <configuration name="go build my-app-backend/cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="my-app-backend" />
       <working_directory value="$PROJECT_DIR$" />
@@ -86,61 +108,61 @@
       <filePath value="$PROJECT_DIR$/cmd/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="TestRedisClient_Set in my-app-backend/nosql" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGridFSDaoService_DeleteFile in my-app-backend/db" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="my-app-backend" />
-      <working_directory value="$PROJECT_DIR$/nosql" />
+      <working_directory value="$PROJECT_DIR$/db" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="my-app-backend/nosql" />
+      <package value="my-app-backend/db" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestRedisClient_Set\E$" />
+      <pattern value="^\QTestGridFSDaoService_DeleteFile\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestSignRefreshToken in my-app-backend/auth" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGridFSDaoService_DownloadFile in my-app-backend/db" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="my-app-backend" />
-      <working_directory value="$PROJECT_DIR$/auth" />
+      <working_directory value="$PROJECT_DIR$/db" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="my-app-backend/auth" />
+      <package value="my-app-backend/db" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestSignRefreshToken\E$" />
+      <pattern value="^\QTestGridFSDaoService_DownloadFile\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestStaticSrcApiHandler_ADownloadFile in my-app-backend/service" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGridFSDaoService_UploadFile in my-app-backend/db" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="my-app-backend" />
-      <working_directory value="$PROJECT_DIR$/service" />
+      <working_directory value="$PROJECT_DIR$/db" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="my-app-backend/service" />
+      <package value="my-app-backend/db" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestStaticSrcApiHandler_ADownloadFile\E$" />
+      <pattern value="^\QTestGridFSDaoService_UploadFile\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestUserApiHandler_SignUp in my-app-backend/service" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSystemDaoService_Insert in my-app-backend/db" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="my-app-backend" />
-      <working_directory value="$PROJECT_DIR$/service" />
+      <working_directory value="$PROJECT_DIR$/db" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="my-app-backend/service" />
+      <package value="my-app-backend/db" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestUserApiHandler_SignUp\E$" />
+      <pattern value="^\QTestSystemDaoService_Insert\E$" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestUserApiHandler_SignUp in my-app-backend/service" />
+        <item itemvalue="Go Test.TestGridFSDaoService_DownloadFile in my-app-backend/db" />
+        <item itemvalue="Go Test.TestGridFSDaoService_UploadFile in my-app-backend/db" />
+        <item itemvalue="Go Test.TestGridFSDaoService_DeleteFile in my-app-backend/db" />
         <item itemvalue="Go Build.go build my-app-backend/cmd" />
-        <item itemvalue="Go Test.TestStaticSrcApiHandler_ADownloadFile in my-app-backend/service" />
-        <item itemvalue="Go Test.TestSignRefreshToken in my-app-backend/auth" />
-        <item itemvalue="Go Test.TestRedisClient_Set in my-app-backend/nosql" />
+        <item itemvalue="Go Test.TestSystemDaoService_Insert in my-app-backend/db" />
       </list>
     </recent_temporary>
   </component>
@@ -172,6 +194,16 @@
           <url>file://$USER_HOME$/go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.2.0/parser.go</url>
           <line>99</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/go.mongodb.org/mongo-driver@v1.8.1/mongo/gridfs/bucket.go</url>
+          <line>607</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file:///usr/local/go/src/runtime/panic.go</url>
+          <line>1050</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
