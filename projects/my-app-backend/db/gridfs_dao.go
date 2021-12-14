@@ -28,6 +28,8 @@ type GridFSDao interface {
 	DownloadFile(filename string) ([]byte, primitive.M, error)
 
 	DeleteFile(filename string) error
+
+	ExistFile(filename string) bool
 }
 
 func NewGridFSDaoService() *GridFSDaoService {
@@ -156,4 +158,30 @@ func (g *GridFSDaoService) DeleteFile(filename string) error {
 		return err
 	}
 	return nil
+}
+
+func (g *GridFSDaoService) ExistFile(filename string) bool {
+	ctx, cancel := context2.WithTimeout(context2.Background(), 5*time.Second)
+	defer cancel()
+	cursor, err := g.bucket.GetFilesCollection().Find(ctx, bson.M{"filename": filename})
+	if err != nil {
+		g.logger.Errorf("查找files失败，文件名: %s", filename)
+		return false
+	}
+	defer func(cursor *mongo.Cursor, ctx context2.Context) {
+		err := cursor.Close(ctx)
+		if err != nil {
+			g.logger.Error(err)
+		}
+	}(cursor, ctx)
+	var gFile *gridfs.File = nil
+	for cursor.Next(ctx) {
+		file := gridfs.File{}
+		err := cursor.Decode(&file)
+		if err != nil {
+			return false
+		}
+		gFile = &file
+	}
+	return gFile != nil
 }

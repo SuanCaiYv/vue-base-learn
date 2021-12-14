@@ -53,12 +53,14 @@ func BeforeStart() {
 		util.JustPanic(err)
 	}
 	gridFsDao := db.NewGridFSDaoService()
-	defaultAvatarPath, err := filepath.Abs("static/default-avatar.png")
-	util.JustPanic(err)
-	defaultAvatar, err := os.OpenFile(defaultAvatarPath, os.O_RDONLY, os.ModePerm)
-	util.JustPanic(err)
-	data, err := ioutil.ReadAll(defaultAvatar)
-	util.JustPanic(err)
-	err = gridFsDao.UploadFile(data, "default-avatar.png", make(map[string]interface{}))
-	util.JustPanic(err)
+	if !gridFsDao.ExistFile("default-avatar.png") {
+		defaultAvatarPath, err := filepath.Abs("static/default-avatar.png")
+		util.JustPanic(err)
+		defaultAvatar, err := os.OpenFile(defaultAvatarPath, os.O_RDONLY, os.ModePerm)
+		util.JustPanic(err)
+		data, err := ioutil.ReadAll(defaultAvatar)
+		util.JustPanic(err)
+		err = gridFsDao.UploadFile(data, "default-avatar.png", make(map[string]interface{}))
+		util.JustPanic(err)
+	}
 }

@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="部分代码处理" />
+    <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="部分代码处理">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_14,_9_33_AM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_14__9_33_AM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-app/src/views/Admin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/hook_onstart.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/hook_onstart.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/conf.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/conf.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/gridfs_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/gridfs_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/views/Home.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,7 +85,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestGridFSDaoService_DownloadFile in my-app-backend/db">
+  <component name="RunManager" selected="Go Build.go build my-app-backend/cmd">
     <configuration name="go build my-app-backend/cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="my-app-backend" />
       <working_directory value="$PROJECT_DIR$" />
@@ -134,10 +145,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build my-app-backend/cmd" />
         <item itemvalue="Go Test.TestGridFSDaoService_DownloadFile in my-app-backend/db" />
         <item itemvalue="Go Test.TestGridFSDaoService_UploadFile in my-app-backend/db" />
         <item itemvalue="Go Test.TestGridFSDaoService_DeleteFile in my-app-backend/db" />
-        <item itemvalue="Go Build.go build my-app-backend/cmd" />
         <item itemvalue="Go Test.TestSystemDaoService_Insert in my-app-backend/db" />
       </list>
     </recent_temporary>

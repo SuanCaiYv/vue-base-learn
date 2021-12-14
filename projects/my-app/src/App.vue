@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 </script>
 
 <template>
@@ -11,7 +11,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+    font-size: 20px;
+    height: 100%;
 }
 </style>
