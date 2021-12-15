@@ -14,6 +14,7 @@ var logger = util.NewLogger()
 
 func Route() {
 	router := gin.New()
+	router.Use(corsMiddleware())
 	router.Use(gin.CustomRecovery(func(context *gin.Context, recovered interface{}) {
 		if err, ok := recovered.(string); ok {
 			context.JSON(http.StatusInternalServerError, resp.NewIntervalError(err))
@@ -24,6 +25,7 @@ func Route() {
 	// ApiHandler实例化
 	staticSrcApi := service.NewStaticSrcApiHandler()
 	userApiHandler := service.NewUserApiHandler()
+	// 版本分组
 	versionOne := router.Group("/v1")
 	{
 		versionOne.PUT("/user", userApiHandler.Login)
@@ -37,6 +39,22 @@ func Route() {
 	}
 	err := router.Run(":8190")
 	util.JustPanic(err)
+}
+
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE, HEAD")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }
 
 func authFunc(context *gin.Context) {

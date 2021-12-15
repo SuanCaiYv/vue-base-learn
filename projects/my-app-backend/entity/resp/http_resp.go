@@ -27,10 +27,10 @@ var authFailed = &Result{
 }
 
 type Result struct {
-	Code      int
-	Msg       string
-	Data      interface{}
-	Timestamp time.Time
+	Code      int         `json:"code"`
+	Msg       string      `json:"msg"`
+	Data      interface{} `json:"data"`
+	Timestamp time.Time   `json:"timestamp"`
 }
 
 func NewOk(data interface{}) *Result {

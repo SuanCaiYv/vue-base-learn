@@ -1,19 +1,24 @@
 <template>
     <div>
-        <el-row>
-            <el-col :span="24"><div class="grid-content bg-purple-dark">aaa</div></el-col>
-        </el-row>
-        <el-row>
-            <el-col :span="12"><div class="grid-content bg-purple"></div>ccc</el-col>
-            <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
-        </el-row>
+        <button @click="login">测试</button>
+        <br>
+        {{resp}}
     </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue"
+import HttpClient from "../net/index"
 
 const name = ref<String>("Test")
+const resp = ref<Object>({})
+
+const login = function () {
+    HttpClient.put("/user", {
+        username: "2508826394@qq.com",
+        credential: "123456"
+    }, resp)
+}
 </script>
 
 <style scoped>
