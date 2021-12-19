@@ -6,32 +6,36 @@ const baseUrl = "http://127.0.0.1:8190/v1"
 axios.defaults.timeout = 2000
 
 const httpClient = {
-    get: function<T extends object> (uri: string, query: T, resp: Ref<Object>) {
+    get: function<T extends object> (uri: string, query: T, func: Function) {
         let str = ""
         for (let field in query) {
             str += (field + "=" + query[field])
         }
         let url = baseUrl + uri + "?" + str
         axios.get(url)
-            .then(resp0 => {resp.value = resp0})
+            .then(resp => {
+                func(resp)
+            })
             .catch(err => {
                 console.log(err)
             })
-        return resp
     },
-    post: function<T extends object> (uri: string, params: T, resp: Ref<Object>) {
+    post: function<T extends object> (uri: string, params: T, func: Function) {
         let url = baseUrl + uri
         axios.post(url, params)
-            .then(resp0 => {resp.value = resp0})
+            .then(resp => {
+                func(resp)
+            })
             .catch(err => {
                 console.log(err)
             })
-        return resp
     },
-    put: function<T extends object> (uri: string, params: T, resp: Ref<Object>) {
+    put: function<T extends object> (uri: string, params: T, func: Function) {
         let url = baseUrl + uri
         axios.put(url, params)
-            .then(resp0 => {resp.value = resp0})
+            .then(resp => {
+                func(resp)
+            })
             .catch(err => {
                 console.log(err)
             })

@@ -8,7 +8,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"golang.org/x/net/context"
-	"log"
 	config2 "my-app-backend/config"
 	"my-app-backend/entity"
 	"my-app-backend/util"
@@ -157,7 +156,8 @@ func (s *SysRoleDaoService) SelectByName(name string) (*entity.SysRole, error) {
 	defer cancel()
 	cursor, err := s.collection.Find(ctx, primitive.M{"name": name})
 	if err != nil {
-		log.Fatal(err)
+		s.logger.Error(err)
+		return nil, err
 	}
 	defer func(cursor *mongo.Cursor, ctx context2.Context) {
 		err := cursor.Close(ctx)

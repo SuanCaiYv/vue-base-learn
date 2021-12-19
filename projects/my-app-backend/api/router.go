@@ -23,13 +23,15 @@ func Route() {
 		}
 	}))
 	// ApiHandler实例化
-	staticSrcApi := service.NewStaticSrcApiHandler()
 	userApiHandler := service.NewUserApiHandler()
+	staticSrcApi := service.NewStaticSrcApiHandler()
+	articleApi :=
 	// 版本分组
 	versionOne := router.Group("/v1")
 	{
 		versionOne.PUT("/user", userApiHandler.Login)
 		versionOne.POST("/user", userApiHandler.SignUp)
+		versionOne.GET("/article/list")
 
 		// 静态资源处理器
 		versionOne.GET("/static/a/:filename", staticSrcApi.ADownloadFile)

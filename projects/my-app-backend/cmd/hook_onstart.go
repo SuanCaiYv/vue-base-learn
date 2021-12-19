@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/md5"
+	"fmt"
 	"io/ioutil"
 	config2 "my-app-backend/config"
 	"my-app-backend/db"
@@ -40,13 +42,13 @@ func BeforeStart() {
 		}
 		sysUser := entity.DefaultSysUser()
 		sysUser.Username = val.Username
-		sysUser.Credential = val.Credential
+		sysUser.Salt = strings.ReplaceAll(util.GenerateUUID(), "-", "")[:6]
+		sysUser.Credential = fmt.Sprintf("%x", md5.Sum([]byte(val.Credential+"_"+sysUser.Salt)))
 		if config.Owner == val.Username {
 			sysUser.Role = entity.RoleOwner
 		} else {
 			sysUser.Role = entity.RoleReader
 		}
-		sysUser.Salt = strings.ReplaceAll(util.GenerateUUID(), "-", "")[:6]
 		sysUser.Info.Email = val.Username
 		sysUser.Info.Nickname = val.Username
 		err = sysUserDao.Insert(sysUser)
