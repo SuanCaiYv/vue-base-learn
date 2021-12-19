@@ -31,6 +31,8 @@ type SysUserDao interface {
 
 	Update(sysUser *entity.SysUser) error
 
+	Delete0(id string) error
+
 	Delete(id string) error
 
 	SelectByUsername(username string) (*entity.SysUser, error)
@@ -72,52 +74,92 @@ func (s *SysUserDaoService) Insert(sysUser *entity.SysUser) error {
 	return err
 }
 
+// Select 不同于该有的作法，这里当Record为空时，返回nil, nil，而不是nil, ErrNotFound
+// 返回error只有在真的发生了error时才会返回。
 func (s *SysUserDaoService) Select(id string) (*entity.SysUser, error) {
-	//TODO implement me
-	panic("implement me")
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	one := s.collection.FindOne(ctx, primitive.M{"_id": id})
+	if err := one.Err(); err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+		s.logger.Error(err)
+		return nil, err
+	}
+	result := entity.SysUser{}
+	err := one.Decode(&result)
+	if err != nil {
+		s.logger.Error(err)
+		return nil, err
+	}
+	return &result, nil
 }
 
 func (s *SysUserDaoService) Update(sysUser *entity.SysUser) error {
-	//TODO implement me
-	panic("implement me")
+	sysUser.UpdatedTime = time.Now()
+	timeout, cancelFunc := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancelFunc()
+	_, err := s.collection.UpdateByID(timeout, sysUser.Id, sysUser)
+	return err
+}
+
+func (s *SysUserDaoService) Delete0(id string) error {
+	timeout, cancelFunc := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancelFunc()
+	_, err := s.collection.DeleteOne(timeout, primitive.M{"_id": id})
+	return err
 }
 
 func (s *SysUserDaoService) Delete(id string) error {
-	//TODO implement me
-	panic("implement me")
+	sysUser, err := s.Select(id)
+	if err != nil {
+		return err
+	}
+	sysUser.Available = false
+	sysUser.UpdatedTime = time.Now()
+	err = s.Update(sysUser)
+	return err
 }
 
 func (s *SysUserDaoService) SelectByUsername(username string) (*entity.SysUser, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
-	cursor, err := s.collection.Find(ctx, primitive.M{"username": username})
-	if err != nil {
+	one := s.collection.FindOne(ctx, primitive.M{"username": username})
+	if err := one.Err(); err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
 		s.logger.Error(err)
-	}
-	defer func(cursor *mongo.Cursor, ctx context2.Context) {
-		err := cursor.Close(ctx)
-		if err != nil {
-			s.logger.Error(err)
-		}
-	}(cursor, ctx)
-	var result *entity.SysUser = nil
-	for cursor.Next(ctx) {
-		sysUser := entity.SysUser{}
-		err := cursor.Decode(&sysUser)
-		if err != nil {
-			return nil, err
-		}
-		result = &sysUser
-	}
-	if err := cursor.Err(); err != nil {
 		return nil, err
 	}
-	return result, nil
+	result := entity.SysUser{}
+	err := one.Decode(&result)
+	if err != nil {
+		s.logger.Error(err)
+		return nil, err
+	}
+	return &result, nil
 }
 
 func (s *SysUserDaoService) SelectByNickname(nickname string) (*entity.SysUser, error) {
-	//TODO implement me
-	panic("implement me")
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	one := s.collection.FindOne(ctx, primitive.M{"nickname": nickname})
+	if err := one.Err(); err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+		s.logger.Error(err)
+		return nil, err
+	}
+	result := entity.SysUser{}
+	err := one.Decode(&result)
+	if err != nil {
+		s.logger.Error(err)
+		return nil, err
+	}
+	return &result, nil
 }
 
 func NewSysRoleDaoService() *SysRoleDaoService {
@@ -154,28 +196,19 @@ func (s *SysRoleDaoService) Select(id string) (*entity.SysRole, error) {
 func (s *SysRoleDaoService) SelectByName(name string) (*entity.SysRole, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	cursor, err := s.collection.Find(ctx, primitive.M{"name": name})
+	one := s.collection.FindOne(ctx, primitive.M{"name": name})
+	if err := one.Err(); err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+		s.logger.Error(err)
+		return nil, err
+	}
+	result := entity.SysRole{}
+	err := one.Decode(&result)
 	if err != nil {
 		s.logger.Error(err)
 		return nil, err
 	}
-	defer func(cursor *mongo.Cursor, ctx context2.Context) {
-		err := cursor.Close(ctx)
-		if err != nil {
-			s.logger.Error(err)
-		}
-	}(cursor, ctx)
-	var result *entity.SysRole = nil
-	for cursor.Next(ctx) {
-		sysRole := entity.SysRole{}
-		err := cursor.Decode(&sysRole)
-		if err != nil {
-			return nil, err
-		}
-		result = &sysRole
-	}
-	if err := cursor.Err(); err != nil {
-		return nil, err
-	}
-	return result, nil
+	return &result, nil
 }

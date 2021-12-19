@@ -1,0 +1,108 @@
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1639324908497)
++++ b/.idea/vcs.xml	(date 1639324908497)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"ALL\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"4e6e14c2-b2bd-4da7-aa85-0d7519881e9a\" name=\"Changes\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/.gitignore\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/my-app-backend.iml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/api/article.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/api/router.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/api/user.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/application.json\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/auth/jwt.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/auth/jwt_test.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/cmd/hook_onstart.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/cmd/hook_onstart_test.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/cmd/main.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/config/conf.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/config/config_test.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/article_dao.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/db_model.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/gridfs_dao.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/gridfs_dao_test.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/operation_dao.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/sys_dao.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/db/sys_dao_test.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/entity/article.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/entity/operation.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/entity/sys.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/entity/user.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/go.mod\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/go.sum\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/nosql/redis_ops.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/nosql/redis_ops_test.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/util/base.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/util/logger.go\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/.gitignore\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/.vscode/extensions.json\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/README.md\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/index.html\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/package-lock.json\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/package.json\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/public/favicon.ico\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/App.vue\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/env.d.ts\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/main.ts\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/router/index.ts\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/store/index.ts\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/views/About.vue\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/views/Home.vue\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/src/views/Test.vue\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/tsconfig.json\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/../my-app/vite.config.ts\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Go File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"GOROOT\" url=\"file:///usr/local/go\" />\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/../..\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"GoLibraries\">\n    <option name=\"indexEntireGoPath\" value=\"false\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"228XpcPDHZTVj48DujhWHbY8HEL\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\n    <property name=\"DefaultGoTemplateProperty\" value=\"Go File\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"go.format.on.save.advertiser.fired\" value=\"true\" />\n    <property name=\"go.formatter.settings.were.checked\" value=\"true\" />\n    <property name=\"go.import.settings.migrated\" value=\"true\" />\n    <property name=\"go.modules.go.list.on.any.changes.was.set\" value=\"true\" />\n    <property name=\"go.watchers.conflict.with.on.save.actions.check.performed\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Go Test.TestSignRefreshToken in my-app-backend/auth\">\n    <configuration name=\"go build my-app-backend/cmd\" type=\"GoApplicationRunConfiguration\" factoryName=\"Go Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"my-app-backend\" />\n      <working_directory value=\"$PROJECT_DIR$\" />\n      <kind value=\"PACKAGE\" />\n      <package value=\"my-app-backend/cmd\" />\n      <directory value=\"$PROJECT_DIR$\" />\n      <filePath value=\"$PROJECT_DIR$/cmd/main.go\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"TestGridFSDaoService_UploadFile in my-app-backend/db\" type=\"GoTestRunConfiguration\" factoryName=\"Go Test\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"my-app-backend\" />\n      <working_directory value=\"$PROJECT_DIR$/db\" />\n      <root_directory value=\"$PROJECT_DIR$\" />\n      <kind value=\"PACKAGE\" />\n      <package value=\"my-app-backend/db\" />\n      <directory value=\"$PROJECT_DIR$\" />\n      <filePath value=\"$PROJECT_DIR$\" />\n      <framework value=\"gotest\" />\n      <pattern value=\"^\\QTestGridFSDaoService_UploadFile\\E$\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"TestInitSysRoleDB in my-app-backend/cmd\" type=\"GoTestRunConfiguration\" factoryName=\"Go Test\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"my-app-backend\" />\n      <working_directory value=\"$PROJECT_DIR$/cmd\" />\n      <root_directory value=\"$PROJECT_DIR$\" />\n      <kind value=\"PACKAGE\" />\n      <package value=\"my-app-backend/cmd\" />\n      <directory value=\"$PROJECT_DIR$\" />\n      <filePath value=\"$PROJECT_DIR$\" />\n      <framework value=\"gotest\" />\n      <pattern value=\"^\\QTestInitSysRoleDB\\E$\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"TestRedisClient_Set in my-app-backend/nosql\" type=\"GoTestRunConfiguration\" factoryName=\"Go Test\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"my-app-backend\" />\n      <working_directory value=\"$PROJECT_DIR$/nosql\" />\n      <root_directory value=\"$PROJECT_DIR$\" />\n      <kind value=\"PACKAGE\" />\n      <package value=\"my-app-backend/nosql\" />\n      <directory value=\"$PROJECT_DIR$\" />\n      <filePath value=\"$PROJECT_DIR$\" />\n      <framework value=\"gotest\" />\n      <pattern value=\"^\\QTestRedisClient_Set\\E$\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"TestSignRefreshToken in my-app-backend/auth\" type=\"GoTestRunConfiguration\" factoryName=\"Go Test\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"my-app-backend\" />\n      <working_directory value=\"$PROJECT_DIR$/auth\" />\n      <root_directory value=\"$PROJECT_DIR$\" />\n      <kind value=\"PACKAGE\" />\n      <package value=\"my-app-backend/auth\" />\n      <directory value=\"$PROJECT_DIR$\" />\n      <filePath value=\"$PROJECT_DIR$\" />\n      <framework value=\"gotest\" />\n      <pattern value=\"^\\QTestSignRefreshToken\\E$\" />\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Go Test.TestSignRefreshToken in my-app-backend/auth\" />\n        <item itemvalue=\"Go Test.TestRedisClient_Set in my-app-backend/nosql\" />\n        <item itemvalue=\"Go Test.TestGridFSDaoService_UploadFile in my-app-backend/db\" />\n        <item itemvalue=\"Go Build.go build my-app-backend/cmd\" />\n        <item itemvalue=\"Go Test.TestInitSysRoleDB in my-app-backend/cmd\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n  </component>\n  <component name=\"VgoProject\">\n    <integration-enabled>true</integration-enabled>\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"DlvLineBreakpoint\">\n          <url>file://$USER_HOME$/go/pkg/mod/github.com/golang-jwt/jwt/v4@v4.2.0/parser.go</url>\n          <line>99</line>\n          <option name=\"timeStamp\" value=\"12\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 13e7db1f5b5b63011b34f71c7c4d91fd1c7633d9)
++++ b/.idea/workspace.xml	(date 1639401673598)
+@@ -4,56 +4,8 @@
+     <option name="autoReloadType" value="ALL" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/my-app-backend.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/api/article.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/api/router.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/api/user.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/application.json" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/auth/jwt.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/auth/jwt_test.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/cmd/hook_onstart.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/cmd/hook_onstart_test.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/config/conf.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/config/config_test.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/article_dao.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/db_model.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/gridfs_dao.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/gridfs_dao_test.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/operation_dao.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/sys_dao.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/db/sys_dao_test.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/entity/article.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/entity/operation.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/entity/sys.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/entity/user.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/nosql/redis_ops.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/nosql/redis_ops_test.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/util/base.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/util/logger.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/.gitignore" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/.vscode/extensions.json" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/README.md" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/index.html" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/package-lock.json" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/package.json" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/public/favicon.ico" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/App.vue" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/env.d.ts" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/main.ts" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/router/index.ts" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/store/index.ts" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/views/About.vue" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/views/Home.vue" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/src/views/Test.vue" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/tsconfig.json" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/../my-app/vite.config.ts" afterDir="false" />
++    <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="frontend">
++      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -95,9 +47,11 @@
+   </component>
+   <component name="PropertiesComponent">
+     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
++    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="DefaultGoTemplateProperty" value="Go File" />
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
++    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="go.format.on.save.advertiser.fired" value="true" />
+     <property name="go.formatter.settings.were.checked" value="true" />
+@@ -196,6 +150,9 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
++    <MESSAGE value="backend" />
++    <MESSAGE value="frontend" />
++    <option name="LAST_COMMIT_MESSAGE" value="frontend" />
+   </component>
+   <component name="VgoProject">
+     <integration-enabled>true</integration-enabled>

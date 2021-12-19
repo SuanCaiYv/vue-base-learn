@@ -6,6 +6,7 @@ import (
 	"my-app-backend/config"
 	"my-app-backend/db"
 	"my-app-backend/entity/resp"
+	"my-app-backend/util"
 	"strconv"
 )
 
@@ -25,11 +26,11 @@ type ArticleApiHandler struct {
 	logger     *logrus.Logger
 }
 
-func NewArticleApiHandler() {
+func NewArticleApiHandler() *ArticleApiHandler {
 	return &ArticleApiHandler{
-		articleDao:,
-		gridFsDao:  nil,
-		logger:     nil,
+		articleDao: db.NewArticleDaoService(),
+		gridFsDao:  db.NewGridFSDaoService(),
+		logger:     util.NewLogger(),
 	}
 }
 
