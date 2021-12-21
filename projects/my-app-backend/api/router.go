@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"my-app-backend/auth"
 	"my-app-backend/entity/resp"
@@ -26,6 +27,15 @@ func Route() {
 	userApiHandler := service.NewUserApiHandler()
 	staticSrcApi := service.NewStaticSrcApiHandler()
 	articleApi := service.NewArticleApiHandler()
+	// 测试用
+	router.GET("/t", func(context *gin.Context) {
+		fmt.Println(context.Query("name"))
+		context.JSON(200, struct{}{})
+	})
+	router.POST("/t", func(context *gin.Context) {
+		fmt.Println(context.PostForm("name"))
+		context.JSON(200, struct{}{})
+	})
 	// 版本分组
 	versionOne := router.Group("/v1")
 	{

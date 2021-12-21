@@ -74,7 +74,7 @@ func (s *SysUserDaoService) Insert(sysUser *entity.SysUser) error {
 	return err
 }
 
-// Select 不同于该有的作法，这里当Record为空时，返回nil, nil，而不是nil, ErrNotFound
+// Select 不同于该有的做法，这里当Record为空时，返回nil, nil，而不是nil, ErrNotFound
 // 返回error只有在真的发生了error时才会返回。
 func (s *SysUserDaoService) Select(id string) (*entity.SysUser, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
