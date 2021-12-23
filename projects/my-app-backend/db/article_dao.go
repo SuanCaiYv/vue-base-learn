@@ -73,7 +73,7 @@ func (a *ArticleDaoService) Select(id string) (*entity.Article, error) {
 			return nil, nil
 		}
 		a.logger.Error(err)
-		return nil, one.Err()
+		return nil, err
 	}
 	result := entity.Article{}
 	err := one.Decode(&result)
@@ -93,7 +93,7 @@ func (a *ArticleDaoService) SelectByAuthorName(author, name string) (*entity.Art
 			return nil, nil
 		}
 		a.logger.Error(err)
-		return nil, one.Err()
+		return nil, err
 	}
 	result := entity.Article{}
 	err := one.Decode(&result)
