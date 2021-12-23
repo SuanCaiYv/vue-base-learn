@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="部分代码处理">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_19,_10_20_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_19__10_20_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/temp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_13,_21_21_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_14,_9_33_AM_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="踩坑第五天">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my-app/src/temp.html" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/temp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sys_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sys_dao.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +163,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="部分代码处理" />
-    <option name="LAST_COMMIT_MESSAGE" value="部分代码处理" />
+    <MESSAGE value="踩坑第五天" />
+    <option name="LAST_COMMIT_MESSAGE" value="踩坑第五天" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

@@ -66,8 +66,8 @@ func NewSysUserDaoService() *SysUserDaoService {
 func (s *SysUserDaoService) Insert(sysUser *entity.SysUser) error {
 	sysUser.Id = primitive.NewObjectID().Hex()
 	sysUser.Available = true
-	sysUser.CreatedTime = time.Time{}
-	sysUser.UpdatedTime = time.Time{}
+	sysUser.CreatedTime = time.Now()
+	sysUser.UpdatedTime = time.Now()
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	_, err := s.collection.InsertOne(ctx, sysUser)
@@ -180,8 +180,8 @@ func NewSysRoleDaoService() *SysRoleDaoService {
 func (s *SysRoleDaoService) Insert(sysRole *entity.SysRole) error {
 	sysRole.Id = primitive.NewObjectID().Hex()
 	sysRole.Available = true
-	sysRole.CreatedTime = time.Time{}
-	sysRole.UpdatedTime = time.Time{}
+	sysRole.CreatedTime = time.Now()
+	sysRole.UpdatedTime = time.Now()
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 	_, err := s.collection.InsertOne(ctx, sysRole)
