@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e6e14c2-b2bd-4da7-aa85-0d7519881e9a" name="Changes" comment="踩坑第五天">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_19,_10_20_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db/article_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/article_dao.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

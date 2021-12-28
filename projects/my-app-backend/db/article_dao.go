@@ -172,6 +172,6 @@ func (a *ArticleDaoService) Delete(id string) error {
 		return err
 	}
 	article.UpdatedTime = time.Now()
-	article.Available = true
+	article.Available = false
 	return a.Update(article)
 }
