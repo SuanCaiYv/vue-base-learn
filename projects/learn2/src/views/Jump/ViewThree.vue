@@ -30,7 +30,7 @@ const jump = (): void => {
     router.push({
         name: "views-one",
         params: {
-            msg: "我来自试图三"
+            msg: "我来自视图三"
         }
     })
 }
